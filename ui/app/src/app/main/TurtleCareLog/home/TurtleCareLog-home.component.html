@@ -1,0 +1,44 @@
+<o-form-layout-manager attr="TurtleCareLog" mode="tab" title="TURTLECARELOG">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="TurtleCareLogTable" 
+            service="TurtleCareLog" 
+            entity="TurtleCareLog" 
+            title="TURTLECARELOG"
+            keys="id"
+            columns="id;turtle_id;date;activity" 
+            header-actions="R;D"
+            visible-columns="id;turtle_id;date;activity"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="turtle_id" title="turtle_id">
+    <o-table-cell-renderer-service attr="turtle_id" 
+        service="Turtle" entity="TurtleType" columns="id;name"
+        parent-keys="id:turtle_id"
+        value-column="name" keys="turtle_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #date attr="date" type="timestamp" label="date" editable="no" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-column #activity attr="activity" title="activity" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

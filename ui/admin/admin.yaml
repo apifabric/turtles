@@ -1,0 +1,270 @@
+about:
+  date: October 30, 2024 21:36:38
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 4
+  number_tables: 12
+info_toggle_checked: true
+resources:
+  AdoptionApplication:
+    attributes:
+    - label: ' applicant_name*'
+      name: applicant_name
+      search: true
+      sort: true
+    - name: turtle_id
+    - name: application_date
+      type: DATETIME
+    - name: id
+    description: Records applications for turtle adoption.
+    info_list: Records applications for turtle adoption.
+    tab_groups:
+    - direction: toone
+      fks:
+      - turtle_id
+      name: turtle
+      resource: Turtle
+    type: AdoptionApplication
+    user_key: applicant_name
+  FeedingSchedule:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: turtle_id
+      required: true
+    - name: feed_time
+      type: DATETIME
+    - name: food_type
+    description: Schedule that details feeding times for turtles.
+    info_list: Schedule that details feeding times for turtles.
+    tab_groups:
+    - direction: toone
+      fks:
+      - turtle_id
+      name: turtle
+      resource: Turtle
+    type: FeedingSchedule
+    user_key: id
+  Habitat:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: climate
+    - name: size
+    - name: id
+    description: Represents habitats designed for specific turtle species.
+    info_list: Represents habitats designed for specific turtle species.
+    type: Habitat
+    user_key: name
+  HealthCheck:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: turtle_id
+      required: true
+    - name: check_date
+      type: DATETIME
+    - name: notes
+    description: Records health checks conducted on turtles.
+    info_list: Records health checks conducted on turtles.
+    tab_groups:
+    - direction: toone
+      fks:
+      - turtle_id
+      name: turtle
+      resource: Turtle
+    type: HealthCheck
+    user_key: id
+  Pond:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: water_type
+    - name: size
+    - name: id
+    description: Represents ponds where turtles reside.
+    info_list: Represents ponds where turtles reside.
+    type: Pond
+    user_key: name
+  ResearchProject:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: start_date
+      type: DATETIME
+    - name: description
+    - name: id
+    description: Research projects associated with the turtle farm.
+    info_list: Research projects associated with the turtle farm.
+    type: ResearchProject
+    user_key: name
+  Staff:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      required: true
+      search: true
+      sort: true
+    - name: last_name
+      required: true
+    - name: hire_date
+      type: DATETIME
+    - name: role
+    - name: id
+    description: Represents staff members taking care of turtles.
+    info_list: Represents staff members taking care of turtles.
+    type: Staff
+    user_key: first_name
+  SupplyInventory:
+    attributes:
+    - label: ' item_name*'
+      name: item_name
+      required: true
+      search: true
+      sort: true
+    - name: quantity
+    - name: restock_date
+      type: DATETIME
+    - name: id
+    description: Manages inventory of supplies for the farm.
+    info_list: Manages inventory of supplies for the farm.
+    type: SupplyInventory
+    user_key: item_name
+  Turtle:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: species
+    - name: birth_date
+      type: DATETIME
+    - name: weight
+    - name: id
+    description: Represents individual turtles in the farm.
+    info_list: Represents individual turtles in the farm.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - turtle_id
+      name: AdoptionApplicationList
+      resource: AdoptionApplication
+    - direction: tomany
+      fks:
+      - turtle_id
+      name: FeedingScheduleList
+      resource: FeedingSchedule
+    - direction: tomany
+      fks:
+      - turtle_id
+      name: HealthCheckList
+      resource: HealthCheck
+    - direction: tomany
+      fks:
+      - turtle_id
+      name: TurtleCareLogList
+      resource: TurtleCareLog
+    type: Turtle
+    user_key: name
+  TurtleCareLog:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: turtle_id
+      required: true
+    - name: date
+      type: DATETIME
+    - name: activity
+    description: Records the care activities administered to turtles.
+    info_list: Records the care activities administered to turtles.
+    tab_groups:
+    - direction: toone
+      fks:
+      - turtle_id
+      name: turtle
+      resource: Turtle
+    type: TurtleCareLog
+    user_key: id
+  Visitor:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      required: true
+      search: true
+      sort: true
+    - name: last_name
+      required: true
+    - name: visit_date
+      type: DATETIME
+    - name: id
+    description: Tracks visitors attending the turtle farm.
+    info_list: Tracks visitors attending the turtle farm.
+    type: Visitor
+    user_key: first_name
+  Volunteer:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      required: true
+      search: true
+      sort: true
+    - name: last_name
+      required: true
+    - name: join_date
+      type: DATETIME
+    - name: task
+    - name: id
+    description: Details of volunteers assisting in the farm.
+    info_list: Details of volunteers assisting in the farm.
+    type: Volunteer
+    user_key: first_name
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'
